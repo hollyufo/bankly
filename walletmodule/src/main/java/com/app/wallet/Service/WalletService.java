@@ -1,8 +1,6 @@
 package com.app.wallet.Service;
 import com.app.wallet.Repository.WalletRepository;
 import com.app.wallet.Entity.wallet;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

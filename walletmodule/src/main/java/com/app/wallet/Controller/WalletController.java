@@ -1,34 +1,68 @@
 package com.app.wallet.Controller;
 
+import com.app.wallet.Dto.WalletResponse;
 import com.app.wallet.Dto.walletDto;
 import com.app.wallet.Entity.wallet;
 import com.app.wallet.Service.WalletService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("api/v1/wallet")
 @RequiredArgsConstructor
+@Slf4j
 public class WalletController {
     private final WalletService walletService;
 
-    // create wallet
+    /**
+     * Creates a new wallet.
+     *
+     * @param walletDto the wallet information
+     * @return the created wallet
+     */
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
-    public wallet createWallet(@RequestBody walletDto walletDto) {
-        return walletService.createWallet(walletDto.getGovId(), walletDto.getBalance());
+    public ResponseEntity<WalletResponse> createWallet(@Valid @RequestBody walletDto walletDto) {
+        wallet wallet = walletService.createWallet(walletDto.getGovId(), walletDto.getBalance());
+        WalletResponse response = new WalletResponse(wallet, "Wallet created successfully");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    // get wallet
+
+    /**
+     * Gets the wallet information for a given government ID.
+     *
+     * @param govId the government ID
+     * @return the wallet information
+     */
     @GetMapping("/get/{govId}")
-    public wallet getWallet(@PathVariable String govId) {
-        return walletService.getWallet(govId);
+    public ResponseEntity<WalletResponse> getWallet(@PathVariable @NotNull String govId) {
+        wallet wallet = walletService.getWallet(govId);
+        if (wallet == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        WalletResponse response = new WalletResponse(wallet, "Wallet retrieved successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    // update wallet balance
+
+    /**
+     * Updates the balance of a wallet.
+     *
+     * @param govId the government ID
+     * @param balance the new balance
+     * @return the updated wallet
+     */
     @PutMapping("/update/{govId}/{balance}")
-    public wallet updateWallet(@PathVariable String govId, @PathVariable double balance) {
-        return walletService.updateWallet(govId, balance);
+    public ResponseEntity<WalletResponse> updateWallet(@PathVariable @NotNull String govId,
+                                                       @PathVariable @NotNull double balance) {
+        wallet wallet = walletService.updateWallet(govId, balance);
+        if (wallet == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        WalletResponse response = new WalletResponse(wallet, "Wallet balance updated successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
