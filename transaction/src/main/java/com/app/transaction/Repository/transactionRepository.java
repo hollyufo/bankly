@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface transactionRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findByGovId(String govId);
-    // making a transaction
-    Transaction save(Transaction transaction);
 }
 
