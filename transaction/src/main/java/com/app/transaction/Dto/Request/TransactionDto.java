@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class TransactionRequest {
+public class TransactionDto {
     private String govId;
     private double amount;
     private String transactionType;

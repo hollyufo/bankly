@@ -1,7 +1,7 @@
 package com.app.transaction.Service;
 
 
-import com.app.transaction.Dto.Request.TransactionRequest;
+
 import com.app.transaction.Dto.Request.walletDto;
 import com.app.transaction.Dto.Response.TransactionResponse;
 import com.app.transaction.Entity.Transaction;
@@ -11,7 +11,7 @@ import com.app.transaction.Proxies.WalletProxy;
 import com.app.transaction.Repository.transactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import com.app.transaction.Dto.Request.TransactionDto;
 import java.util.List;
 
 @Service
@@ -30,7 +30,7 @@ public class TransactionService {
         return transactionRepository.findByGovId(govId);
     }
     // making a transaction for a specific govId
-    public TransactionResponse makeTransaction(TransactionRequest transactionDto) throws InvalidTransactionTypeException, InsufficientBalanceException {
+    public TransactionResponse makeTransaction(TransactionDto transactionDto) throws InvalidTransactionTypeException, InsufficientBalanceException {
         String govId = transactionDto.getGovId();
         double amount = transactionDto.getAmount();
         String transactionType = transactionDto.getTransactionType();
