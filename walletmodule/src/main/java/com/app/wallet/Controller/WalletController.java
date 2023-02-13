@@ -27,9 +27,15 @@ public class WalletController {
      */
     @PostMapping("/create")
     public ResponseEntity<WalletResponse> createWallet(@Valid @RequestBody walletDto walletDto) {
-        wallet wallet = walletService.createWallet(walletDto.getGovId(), walletDto.getBalance());
-        WalletResponse response = new WalletResponse(wallet, "Wallet created successfully");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        // check if wallet already exists
+        wallet wallet = walletService.getWallet(walletDto.getGovId());
+        if (wallet != null) {
+            return new ResponseEntity<>(new WalletResponse(wallet, "Wallet already exists"), HttpStatus.CONFLICT);
+        }else{
+            wallet = walletService.createWallet(walletDto.getGovId(), walletDto.getBalance());
+            WalletResponse response = new WalletResponse(wallet, "Wallet created successfully");
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
     }
 
     /**
