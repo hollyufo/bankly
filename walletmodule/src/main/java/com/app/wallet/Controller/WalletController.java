@@ -1,7 +1,7 @@
 package com.app.wallet.Controller;
 
-import com.app.wallet.Dto.WalletResponse;
-import com.app.wallet.Dto.walletDto;
+import com.app.wallet.Dto.Response.WalletResponse;
+import com.app.wallet.Dto.Request.walletDto;
 import com.app.wallet.Entity.wallet;
 import com.app.wallet.Service.WalletService;
 import lombok.RequiredArgsConstructor;

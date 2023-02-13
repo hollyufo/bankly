@@ -1,20 +1,22 @@
-package com.app.wallet.Dto;
+package com.app.transaction.Dto.Response;
 
+
+import com.app.transaction.Dto.Request.walletDto;
 
 public class WalletResponse {
-    private com.app.wallet.Entity.wallet wallet;
+    private walletDto wallet;
     private String message;
 
-    public WalletResponse(com.app.wallet.Entity.wallet wallet, String message) {
+    public WalletResponse(walletDto wallet, String message) {
         this.wallet = wallet;
         this.message = message;
     }
 
-    public com.app.wallet.Entity.wallet getWallet() {
+    public walletDto getWallet() {
         return wallet;
     }
 
-    public void setWallet(com.app.wallet.Entity.wallet wallet) {
+    public void setWallet(walletDto wallet) {
         this.wallet = wallet;
     }
 

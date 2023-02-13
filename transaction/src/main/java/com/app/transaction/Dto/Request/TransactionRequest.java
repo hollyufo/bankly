@@ -1,15 +1,14 @@
-package com.app.wallet.Dto;
+package com.app.transaction.Dto.Request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class walletDto {
+class TransactionRequest {
     private String govId;
-    private double balance;
+    private double amount;
+    private String transactionType;
 }
