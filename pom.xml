@@ -17,6 +17,7 @@
         <module>walletmodule</module>
         <module>transaction</module>
         <module>eureka-server</module>
+        <module>Gateway</module>
     </modules>
 
     <properties>
