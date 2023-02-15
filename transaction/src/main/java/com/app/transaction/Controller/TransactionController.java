@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/transaction")
+@RequestMapping("api/v1/transaction")
 public class TransactionController {
     private final TransactionService transactionService;
     private final WalletProxy walletProxy;
