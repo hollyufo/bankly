@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-route
+          uri: http://auth-microservice-uri:port
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<path>.*), /$\{path}
+            - RemoveRequestHeader=Cookie
+            - RewriteLocationResponseHeader=Location, /auth, /
