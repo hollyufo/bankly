@@ -62,5 +62,8 @@ public class TransactionService {
 
         return new TransactionResponse(transaction, "Transaction successful");
     }
-
+    // get all transactions by govId
+    public List<Transaction> getAllTransactionsByGovId(String govId) {
+        return transactionRepository.findByGovId(govId);
+    }
 }

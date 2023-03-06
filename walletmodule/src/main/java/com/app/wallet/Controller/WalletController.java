@@ -27,8 +27,8 @@ public class WalletController {
      */
     @PostMapping("/create")
     public ResponseEntity<WalletResponse> createWallet(@Valid @RequestBody walletDto walletDto) {
-        // check if wallet already exists
-        wallet wallet = walletService.getWallet(walletDto.getGovId());
+        // check if wallet already existsgetGovId
+        wallet wallet = walletService.getwallet2(walletDto.getGovId());
         if (wallet != null) {
             return new ResponseEntity<>(new WalletResponse(wallet, "Wallet already exists"), HttpStatus.CONFLICT);
         }else{

@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/transaction")
@@ -29,5 +31,9 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> makeTransaction(@RequestBody TransactionDto request) throws InsufficientBalanceException, InvalidTransactionTypeException {
         Transaction transaction = transactionService.makeTransaction(request).getTransaction();
         return ResponseEntity.ok(TransactionResponse.builder().transaction(transaction).message("Transaction made successfully").build());
+    }
+    @GetMapping("/all/{govId}")
+    public ResponseEntity<List<Transaction>> getAllTransactions(@PathVariable String govId){
+        return ResponseEntity.ok(transactionService.getAllTransactions(govId));
     }
 }

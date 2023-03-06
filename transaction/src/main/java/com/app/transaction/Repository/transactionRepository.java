@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface transactionRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findByGovId(String govId);
+    // get all the transaction by govId
+    List<Transaction> findAllByGovId(String govId);
 }
 

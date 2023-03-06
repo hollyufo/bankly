@@ -18,7 +18,9 @@ public class WalletService {
         }
         return wallet;
     }
-
+    public wallet getwallet2(String govId){
+        return walletRepository.findByGovId(govId);
+    }
     public wallet createWallet(String govId, double balance) {
         if (govId == null) {
             throw new IllegalArgumentException("govId cannot be null");
